@@ -37,7 +37,6 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mQuestionTextView = (TextView) findViewById(R.id.text_view);
-
         mQuestionTextView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -79,7 +78,6 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
-
 
         updateQuestion();
     }
