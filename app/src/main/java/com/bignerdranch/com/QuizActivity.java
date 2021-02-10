@@ -124,14 +124,47 @@ public class QuizActivity extends AppCompatActivity {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
 
         int messageResId = 0;
+        //if the current question has not been answered
+        if(!mQuestionBank[mCurrentIndex].isAnswered()) {
+            if (userPressedTrue == answerIsTrue){
+                messageResId = R.string.correct_toast;
+                mQuestionBank[mCurrentIndex].setCorrect(true);
+            }
+            else{
+                messageResId = R.string.incorrect_toast;
+                mQuestionBank[mCurrentIndex].setCorrect(false);
+            }
+            //set current question to has been answered
+            mQuestionBank[mCurrentIndex].setAnswered(true);
+            Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
 
-        if (userPressedTrue == answerIsTrue){
-            messageResId = R.string.correct_toast;
+            if(allAnswered()){
+                String percentToast = "You got %" + (double) numCorrect() / mQuestionBank.length * 100;
+                Toast.makeText(this, percentToast, Toast.LENGTH_SHORT).show();
+            }
         }
-        else{
-            messageResId = R.string.incorrect_toast;
-        }
+        //if question has already been answered, make toast informing user
+        else
+            Toast.makeText(this, "Already Answered", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean allAnswered(){
+        for(int i = 0; i < mQuestionBank.length; i++){
+            if(!mQuestionBank[i].isAnswered()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private int numCorrect(){
+        int num = 0;
+        for(int i = 0; i < mQuestionBank.length; i++){
+            if(mQuestionBank[i].isCorrect()){
+                num++;
+            }
+        }
+        return num;
     }
 }
