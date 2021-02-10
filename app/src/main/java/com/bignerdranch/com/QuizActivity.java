@@ -138,6 +138,7 @@ public class QuizActivity extends AppCompatActivity {
             mQuestionBank[mCurrentIndex].setAnswered(true);
             Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
 
+            //if all questions have been answered, display a toast showing percent correct
             if(allAnswered()){
                 String percentToast = "You got %" + (double) numCorrect() / mQuestionBank.length * 100;
                 Toast.makeText(this, percentToast, Toast.LENGTH_SHORT).show();
@@ -149,6 +150,7 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    //method which checks whether every question stored in question bank has been answered
     private boolean allAnswered(){
         for(int i = 0; i < mQuestionBank.length; i++){
             if(!mQuestionBank[i].isAnswered()){
@@ -158,6 +160,7 @@ public class QuizActivity extends AppCompatActivity {
         return true;
     }
 
+    //method that counts the total number of correct questions in question bank
     private int numCorrect(){
         int num = 0;
         for(int i = 0; i < mQuestionBank.length; i++){
