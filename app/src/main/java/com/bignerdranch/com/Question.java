@@ -11,6 +11,8 @@ public class Question {
     //add instance variable for whether the question was answered correctly
     //includes getters and setters
     private boolean mCorrect;
+    //cheated variable which keeps track of if a certain question has been cheated on
+    private boolean mCheated;
 
     public Question(int textResId, boolean answerTrue){
         mTextResId = textResId;
@@ -19,6 +21,7 @@ public class Question {
         mAnswered = false;
         //set correct to false
         mCorrect = false;
+        mCheated = false;
     }
 
     public int getTextResId() {
@@ -33,6 +36,8 @@ public class Question {
 
     public boolean isCorrect() { return mCorrect; }
 
+    public boolean isCheated() { return mCheated;}
+
     public void setTextResId(int textResId) {
         mTextResId = textResId;
     }
@@ -44,4 +49,8 @@ public class Question {
     public void setAnswered(boolean wasAnswered){ mAnswered = wasAnswered; }
 
     public void setCorrect(boolean wasCorrect){ mCorrect = wasCorrect; }
+
+    public void setCheated(boolean cheated) {
+        mCheated = cheated;
+    }
 }
