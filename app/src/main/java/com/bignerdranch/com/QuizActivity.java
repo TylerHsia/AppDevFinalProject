@@ -28,15 +28,8 @@ public class QuizActivity extends AppCompatActivity {
     private Button mCheatButton;
     private static final int REQUEST_CODE_CHEAT = 0;
     private boolean mIsCheater;
+    private QuestionBank mQuestionBank;
 
-    private Question[] mQuestionBank = new Question[] {
-            new Question(R.string.question_australia, true),
-            new Question(R.string.question_oceans, true),
-            new Question(R.string.question_mideast, false),
-            new Question(R.string.question_africa, false),
-            new Question(R.string.question_americas, true),
-            new Question(R.string.question_asia, true),
-    };
 
     private int mCurrentIndex = 0;
 
@@ -45,6 +38,10 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_main);
+
+        mQuestionBank = new QuestionBank(getApplicationContext());
+
+        String helloValue= getResources().getString(R.string.app_name);
 
         if(savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -56,7 +53,7 @@ public class QuizActivity extends AppCompatActivity {
         mQuestionTextView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.getLength();
                 updateQuestion();
                 mIsCheater = false;
             }
@@ -82,7 +79,7 @@ public class QuizActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.getLength();
                 updateQuestion();
                 mIsCheater = false;
             }
@@ -92,7 +89,7 @@ public class QuizActivity extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                boolean answerIsTrue = mQuestionBank.isAnswerTrue(mCurrentIndex);
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
@@ -124,7 +121,7 @@ public class QuizActivity extends AppCompatActivity {
             }
             //if the user cheated, set the question mCheated value to true and isCheater to true
             if(CheatActivity.wasAnswerShown(data)){
-                mQuestionBank[mCurrentIndex].setCheated(true);
+                mQuestionBank.setCheated(mCurrentIndex, true);
                 mIsCheater = true;
             }
 
@@ -167,17 +164,17 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
-        int question = mQuestionBank[mCurrentIndex].getTextResId();
+        String question = mQuestionBank.getText(mCurrentIndex);
         mQuestionTextView.setText(question);
     }
 
     private void checkAnswer(boolean userPressedTrue){
-        boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+        boolean answerIsTrue = mQuestionBank.isAnswerTrue(mCurrentIndex);
 
         int messageResId = 0;
 
         //if the current question has been cheated on
-        if(mQuestionBank[mCurrentIndex].isCheated() || mIsCheater){
+        if(mQuestionBank.isCheated(mCurrentIndex) || mIsCheater){
             messageResId = R.string.judgement_toast;
         } else{
             if (userPressedTrue == answerIsTrue){
@@ -217,24 +214,9 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
-    //method which checks whether every question stored in question bank has been answered
-    private boolean allAnswered(){
-        for(int i = 0; i < mQuestionBank.length; i++){
-            if(!mQuestionBank[i].isAnswered()){
-                return false;
-            }
-        }
-        return true;
-    }
 
-    //method that counts the total number of correct questions in question bank
-    private int numCorrect(){
-        int num = 0;
-        for(int i = 0; i < mQuestionBank.length; i++){
-            if(mQuestionBank[i].isCorrect()){
-                num++;
-            }
-        }
-        return num;
-    }
+
+
+
+
 }

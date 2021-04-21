@@ -1,7 +1,23 @@
 package com.bignerdranch.com;
 
-public class Question {
-    private int mTextResId;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.media.Image;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+
+public class Question extends AppCompatActivity{
+    private String mText;
     private boolean mAnswerTrue;
 
     //add instance variable for whether the question has been answered
@@ -14,8 +30,19 @@ public class Question {
     //cheated variable which keeps track of if a certain question has been cheated on
     private boolean mCheated;
 
+
     public Question(int textResId, boolean answerTrue){
-        mTextResId = textResId;
+        //mText = getResources().getString(textResId);
+        mAnswerTrue = answerTrue;
+        //set answered to false
+        mAnswered = false;
+        //set correct to false
+        mCorrect = false;
+        mCheated = false;
+    }//*/
+
+    public Question(String question, boolean answerTrue){
+        mText = question;
         mAnswerTrue = answerTrue;
         //set answered to false
         mAnswered = false;
@@ -24,8 +51,8 @@ public class Question {
         mCheated = false;
     }
 
-    public int getTextResId() {
-        return mTextResId;
+    public String getText() {
+        return mText;
     }
 
     public boolean isAnswerTrue() {
@@ -38,9 +65,7 @@ public class Question {
 
     public boolean isCheated() { return mCheated;}
 
-    public void setTextResId(int textResId) {
-        mTextResId = textResId;
-    }
+    public void setText(String text){mText = text;}
 
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;

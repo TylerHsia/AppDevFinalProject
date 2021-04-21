@@ -17,5 +17,10 @@
     <string name="show_answer_button">Show Answer</string>
     <string name="cheat_button">Cheat!</string>
     <string name="judgement_toast">Cheating is wrong.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="question_true_label">True</string>
+    <string name="question_false_label">False</string>
+    <string name="question_title_label">Question:</string>
+    <string name="question_prompt">Enter question here</string>
 
 </resources>
