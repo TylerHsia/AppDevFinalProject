@@ -19,6 +19,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String TAG = "QuizActivity";
     private Button mTrueButton;
     private Button mFalseButton;
+    private Button mEditButton;
     private TextView mTextBox;
     private Button mNextButton;
     private TextView mQuestionTextView;
@@ -94,6 +95,15 @@ public class QuizActivity extends AppCompatActivity {
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
+            }
+        });
+
+        //EditButton onClickListener will open an edit activity
+        mEditButton = (Button) findViewById((R.id.edit_button));
+        mEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
