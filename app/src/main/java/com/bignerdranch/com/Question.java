@@ -14,11 +14,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.UUID;
 
 
 public class Question extends AppCompatActivity{
     private String mText;
     private boolean mAnswerTrue;
+    private UUID mId;
+
 
     //add instance variable for whether the question has been answered
     //includes getters and setters
@@ -42,6 +45,7 @@ public class Question extends AppCompatActivity{
     }//*/
 
     public Question(String question, boolean answerTrue){
+        mId = UUID.randomUUID();
         mText = question;
         mAnswerTrue = answerTrue;
         //set answered to false
@@ -69,6 +73,10 @@ public class Question extends AppCompatActivity{
 
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
+    }
+
+    public UUID getId(){
+        return mId;
     }
 
     public void setAnswered(boolean wasAnswered){ mAnswered = wasAnswered; }

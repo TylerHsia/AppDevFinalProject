@@ -1,64 +1,131 @@
 package com.bignerdranch.com;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link QuestionListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+import java.util.UUID;
+
+
 public class QuestionListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView mCrimeRecyclerView;
+    private QuestionAdapter mAdapter;
+    //variable to store UUID of the crime clicked
+    private UUID UUIDPositionClicked;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.fragment_question_list, container, false);
 
-    public QuestionListFragment() {
-        // Required empty public constructor
-    }
+        mCrimeRecyclerView = (RecyclerView) view
+                .findViewById(R.id.crime_recycler_view);
+        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static QuestionListFragment newInstance(String param1, String param2) {
-        QuestionListFragment fragment = new QuestionListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        updateUI();
+
+        return view;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onResume(){
+        super.onResume();
+        updateUI();
+    }
+
+    private void updateUI(){
+        QuestionBank questionBank = QuestionBank.get(getActivity());
+        List<Question> questions = questionBank.getQuestionBank();
+
+        if(mAdapter == null) {
+            mAdapter = new QuestionAdapter(questions);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        }
+        else{
+            //find the position
+            int position = mAdapter.getPosition();
+            //notify that this position was changed
+            mAdapter.notifyItemChanged(position);
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_question_list, container, false);
+    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private Question mQuestion;
+        private TextView mTitleTextView;
+        private TextView mDateTextView;
+
+        public CrimeHolder(LayoutInflater inflater, ViewGroup parent){
+            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+            itemView.setOnClickListener(this);
+
+            mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
+            mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
+        }
+
+        public void bind(Question question){
+            mQuestion = question;
+            mTitleTextView.setText(mQuestion.getTitle());
+        }
+
+        @Override
+        public void onClick(View v){
+
+            Intent intent = QuizActivity.newIntent(getActivity(), mQuestion.getId());
+            //store the UUID
+            UUIDPositionClicked = mQuestion.getId();
+            startActivity(intent);
+        }
+    }
+
+    private class QuestionAdapter extends RecyclerView.Adapter<CrimeHolder>{
+
+        private List<Question> mQuestions;
+
+        public QuestionAdapter(List<Question> crimes){
+            mQuestions = crimes;
+        }
+
+        @NonNull
+        @Override
+        public CrimeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+
+            return new CrimeHolder(layoutInflater, parent);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CrimeHolder holder, int position) {
+            Question question = mQuestions.get(position);
+            holder.bind(question);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mQuestions.size();
+        }
+
+
+        //method to find the position of a given question in mQuestionBank
+        public int getPosition(){
+            int position = 0;
+            for (Question question : mQuestions){
+                if(question.getId().equals(UUIDPositionClicked)){
+                    break;
+                }
+                position++;
+            }
+            return position;
+        }
     }
 }

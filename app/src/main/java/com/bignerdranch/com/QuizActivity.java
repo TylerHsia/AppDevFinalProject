@@ -1,8 +1,10 @@
 package com.bignerdranch.com;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.UUID;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -29,9 +33,17 @@ public class QuizActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHEAT = 0;
     private boolean mIsCheater;
     private QuestionBank mQuestionBank;
+    private static final String EXTRA_QUESTION_ID = "com.bignerdranch.android.criminalintent.question_id";
+
 
 
     private int mCurrentIndex = 0;
+
+    public static Intent newIntent(Context packageContext, UUID questionId) {
+        Intent intent = new Intent(packageContext, QuizActivity.class);
+        intent.putExtra(EXTRA_QUESTION_ID, questionId);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
