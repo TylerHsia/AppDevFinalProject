@@ -112,7 +112,10 @@ public class QuizActivity extends AppCompatActivity {
         mEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(), "Hi", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
+                startActivity(intent);
+                ///Intent intent = new Intent(getApplicationContext(), SingleFragmentActivity.class);
             }
         });
 
@@ -195,7 +198,6 @@ public class QuizActivity extends AppCompatActivity {
                 messageResId = R.string.incorrect_toast;
             }
         }
-
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
         /*
         //if the current question has not been answered
