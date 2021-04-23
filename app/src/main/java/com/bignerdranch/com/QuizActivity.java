@@ -113,9 +113,8 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Hi", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
+                Intent intent = new Intent(QuizActivity.this, SingleFragmentActivity.class);
                 startActivity(intent);
-                ///Intent intent = new Intent(getApplicationContext(), SingleFragmentActivity.class);
             }
         });
 
