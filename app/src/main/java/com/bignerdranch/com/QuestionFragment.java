@@ -66,26 +66,35 @@ public class QuestionFragment extends Fragment {
         });
 
 
-
+        //when true check box checked, make false checkbox unchecked and question true
         mTrueCheckBox = (CheckBox) v.findViewById(R.id.question_true_box);
         mTrueCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
                 if(mTrueCheckBox.isChecked()){
                     mFalseCheckBox.setChecked(false);
+                    mQuestion.setAnswerTrue(true);
                 }
             }
         });
 
+        //when false check box checked, make true checkbox unchecked and question false
         mFalseCheckBox = (CheckBox) v.findViewById(R.id.question_false_box);
         mFalseCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
                 if(mFalseCheckBox.isChecked()){
                     mTrueCheckBox.setChecked(false);
+                    mQuestion.setAnswerTrue(false);
+
                 }
             }
         });
+
+        //set initial checkbox conditions to reflect inital question conditions
+        if(mQuestion.isAnswerTrue()){
+            mTrueCheckBox.setChecked(true);
+        } else mFalseCheckBox.setChecked(true);
 
         return v;
     }

@@ -78,6 +78,7 @@ public class QuestionListFragment extends Fragment {
         public void bind(Question question){
             mQuestion = question;
             mTitleTextView.setText(mQuestion.getText());
+            mDateTextView.setText("" + mQuestion.isAnswerTrue());
         }
 
         @Override
