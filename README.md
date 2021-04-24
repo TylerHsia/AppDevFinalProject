@@ -1,2 +1,3 @@
 # GeoQuizApp
 # The final project will edit geoquiz by adding a recycler view of the question list which allows the user to edit questions and answers. Concepts used: Button to open the editing activity. Recycler view to hold the list of questions. Fragments as part of that recycler view. Rotation functionality for quiz activity. And themes to change the style of the app. More concepts will be used as I complete the app, though I am not sure of the entire list of concepts I will need right now.
+# More concepts used during development: textbox, intents, toasts, abstract classes, linear layouts, and frame layouts
