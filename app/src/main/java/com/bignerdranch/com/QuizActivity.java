@@ -52,7 +52,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Todo: commented this out
-        mQuestionBank = new QuestionBank(getApplicationContext());
+        mQuestionBank = QuestionBank.get(getApplicationContext());
 
         String helloValue= getResources().getString(R.string.app_name);
 

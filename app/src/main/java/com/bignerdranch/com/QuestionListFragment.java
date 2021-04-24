@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class QuestionListFragment extends Fragment {
 
-    private RecyclerView mCrimeRecyclerView;
+    private RecyclerView mQuestionRecyclerView;
     private QuestionAdapter mAdapter;
     //variable to store UUID of the crime clicked
     private UUID UUIDPositionClicked;
@@ -28,9 +28,9 @@ public class QuestionListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_question_list, container, false);
 
-        mCrimeRecyclerView = (RecyclerView) view
+        mQuestionRecyclerView = (RecyclerView) view
                 .findViewById(R.id.crime_recycler_view);
-        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mQuestionRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
 
@@ -49,7 +49,7 @@ public class QuestionListFragment extends Fragment {
 
         if(mAdapter == null) {
             mAdapter = new QuestionAdapter(questions);
-            mCrimeRecyclerView.setAdapter(mAdapter);
+            mQuestionRecyclerView.setAdapter(mAdapter);
         }
         else{
             //find the position
