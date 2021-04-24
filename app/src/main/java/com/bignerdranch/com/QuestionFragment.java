@@ -56,7 +56,7 @@ public class QuestionFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //mCrime.setTitle(s.toString());
+                mQuestion.setText(s.toString());
             }
 
             @Override

@@ -77,13 +77,13 @@ public class QuestionListFragment extends Fragment {
 
         public void bind(Question question){
             mQuestion = question;
-            mTitleTextView.setText(mQuestion.getTitle());
+            mTitleTextView.setText(mQuestion.getText());
         }
 
         @Override
         public void onClick(View v){
 
-            Intent intent = QuizActivity.newIntent(getActivity(), mQuestion.getId());
+            Intent intent = QuestionActivity.newIntent(getActivity(), mQuestion.getId());
             //store the UUID
             UUIDPositionClicked = mQuestion.getId();
             startActivity(intent);
