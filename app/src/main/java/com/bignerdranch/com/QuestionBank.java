@@ -5,6 +5,7 @@ import android.content.Context;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class QuestionBank {
     private static QuestionBank sQuestionBank;
@@ -32,6 +33,19 @@ public class QuestionBank {
             sQuestionBank = new QuestionBank(context);
         }
         return sQuestionBank;
+    }
+
+    public Question getQuestion(UUID questionID) {
+        for (Question question : mQuestionBank) {
+            if(question.getId().equals(questionID)){
+                return question;
+            }
+        }
+        return null;
+    }
+
+    public Question getQuestion(int index){
+        return mQuestionBank.get(index);
     }
 
 

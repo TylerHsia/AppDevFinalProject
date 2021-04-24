@@ -53,14 +53,16 @@ public class QuestionListFragment extends Fragment {
         }
         else{
             //find the position
-            int position = mAdapter.getPosition();
+            //int position = mAdapter.getPosition();
             //notify that this position was changed
-            mAdapter.notifyItemChanged(position);
+            //mAdapter.notifyItemChanged(position);
+            mAdapter.notifyDataSetChanged();
         }
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        //Todo: make specific to geoquiz
         private Question mQuestion;
         private TextView mTitleTextView;
         private TextView mDateTextView;
@@ -121,7 +123,7 @@ public class QuestionListFragment extends Fragment {
             int position = 0;
             for (Question question : mQuestions){
                 if(question.getId().equals(UUIDPositionClicked)){
-                    break;
+                    return position;
                 }
                 position++;
             }

@@ -20,7 +20,7 @@ import java.util.UUID;
 public class QuestionFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
-    //private Crime mCrime;
+    private Question mQuestion;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mTrueCheckBox;
@@ -38,8 +38,8 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        //mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
+        UUID questionID = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        mQuestion = QuestionBank.get(getActivity()).getQuestion(questionID);
     }
 
     @Override

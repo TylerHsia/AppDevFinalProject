@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeoQuiz">
         <activity android:name=".CheatActivity"></activity>
+        //added the following line to recognize single fragment activity
+        <activity android:name=".SingleFragmentActivity"></activity>
+        //added following to recognize QuestionActivity
+        <activity android:name=".QuestionActivity"></activity>
+
+
         <activity android:name=".QuizActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

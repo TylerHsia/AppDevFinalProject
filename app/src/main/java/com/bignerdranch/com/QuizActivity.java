@@ -51,6 +51,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_main);
 
+        //Todo: commented this out
         mQuestionBank = new QuestionBank(getApplicationContext());
 
         String helloValue= getResources().getString(R.string.app_name);
@@ -113,7 +114,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Hi", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(QuizActivity.this, SingleFragmentActivity.class);
+                Intent intent = QuestionActivity.newIntent(QuizActivity.this, mQuestionBank.getQuestion(mCurrentIndex).getId());
                 startActivity(intent);
             }
         });
