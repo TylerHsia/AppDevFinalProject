@@ -18,12 +18,19 @@ import android.widget.Toast;
 
 import java.util.UUID;
 
+//Todo: still says cheating is wrong after editing the question
+//Todo: functionality for adding questions
+//Todo: previous button
+
+
+
 public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mEditButton;
+    private Button mPreviousButton;
     private TextView mTextBox;
     private Button mNextButton;
     private TextView mQuestionTextView;
@@ -98,6 +105,17 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mPreviousButton = (Button) findViewById(R.id.previous_button);
+        mPreviousButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mCurrentIndex = (mCurrentIndex + mQuestionBank.getLength() - 1) % mQuestionBank.getLength();
+                updateQuestion();
+                mIsCheater = false;
+            }
+        });
+
+        /*
         mCheatButton = (Button) findViewById(R.id.cheat_button);
         mCheatButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -107,6 +125,8 @@ public class QuizActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
+        */
+
 
         //EditButton onClickListener will open an edit activity
         mEditButton = (Button) findViewById((R.id.edit_button));
@@ -153,6 +173,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        updateQuestion();
         Log.d(TAG, "onResume() called");
     }
     @Override
