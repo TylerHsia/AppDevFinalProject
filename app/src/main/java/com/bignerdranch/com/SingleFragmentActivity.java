@@ -11,12 +11,16 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
+    private Button mAddQuestionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +35,19 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             fm.beginTransaction()
                     .add(R.id.fragment_container, fragment).commit();
         }
+
+        mAddQuestionButton = (Button) findViewById(R.id.add_question_button);
+        mAddQuestionButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //add a new question to QuestionBank and start QuestionActivity to edit that question
+                List<Question> mQuestionList = QuestionBank.get(getApplicationContext()).getQuestionBank();
+                mQuestionList.add(new Question("Blank", true));
+                Intent intent = QuestionActivity.newIntent(getApplicationContext(), mQuestionList.get(mQuestionList.size() - 1).getId());
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

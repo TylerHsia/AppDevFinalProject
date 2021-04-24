@@ -22,5 +22,6 @@
     <string name="question_false_label">False</string>
     <string name="question_title_label">Question:</string>
     <string name="question_prompt">Enter question here</string>
+    <string name="add_question_button">Add a question</string>
 
 </resources>

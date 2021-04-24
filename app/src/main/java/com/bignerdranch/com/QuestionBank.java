@@ -41,7 +41,8 @@ public class QuestionBank {
                 return question;
             }
         }
-        return null;
+        Question question = new Question("blank", true);
+        return  question;
     }
 
     public Question getQuestion(int index){

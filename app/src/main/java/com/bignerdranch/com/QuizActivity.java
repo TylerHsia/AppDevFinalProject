@@ -18,9 +18,7 @@ import android.widget.Toast;
 
 import java.util.UUID;
 
-//Todo: still says cheating is wrong after editing the question
-//Todo: functionality for adding questions
-//Todo: previous button
+//Todo: can uncheck both boxes for true/false
 
 
 

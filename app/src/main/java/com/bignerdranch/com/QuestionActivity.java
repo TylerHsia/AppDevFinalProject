@@ -9,17 +9,17 @@ import java.util.UUID;
 
 public class QuestionActivity extends SingleFragmentActivity {
 
-    private static final String EXTRA_CRIME_ID = "com.bignerdranch.android.criminalintent.crime_id";
+    private static final String EXTRA_QUESTION_ID = "com.bignerdranch.android.criminalintent.crime_id";
 
-    public static Intent newIntent(Context packageContext, UUID crimeId){
+    public static Intent newIntent(Context packageContext, UUID questionID){
         Intent intent = new Intent(packageContext, QuestionActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+        intent.putExtra(EXTRA_QUESTION_ID, questionID);
         return intent;
     }
     @Override
     protected Fragment createFragment(){
         UUID crimeId = (UUID) getIntent()
-                .getSerializableExtra(EXTRA_CRIME_ID);
+                .getSerializableExtra(EXTRA_QUESTION_ID);
         return QuestionFragment.newInstance(crimeId);
     }
 }
