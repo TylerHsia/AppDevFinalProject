@@ -14,6 +14,8 @@
         <activity android:name=".SingleFragmentActivity"></activity>
         //added following to recognize QuestionActivity
         <activity android:name=".QuestionActivity"></activity>
+        <activity android:name=".QuestionListActivity"></activity>
+
 
 
         <activity android:name=".QuizActivity">

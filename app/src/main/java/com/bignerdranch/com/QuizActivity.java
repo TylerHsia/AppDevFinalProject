@@ -114,7 +114,9 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Hi", Toast.LENGTH_SHORT).show();
-                Intent intent = QuestionActivity.newIntent(QuizActivity.this, mQuestionBank.getQuestion(mCurrentIndex).getId());
+                //this line opens question activity
+                //Intent intent = QuestionActivity.newIntent(QuizActivity.this, mQuestionBank.getQuestion(mCurrentIndex).getId());
+                Intent intent = new Intent(getApplicationContext(), QuestionListActivity.class);
                 startActivity(intent);
             }
         });
