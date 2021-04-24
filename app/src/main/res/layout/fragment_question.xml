@@ -34,7 +34,13 @@
             android:layout_height="wrap_content"
             android:text="@string/question_false_label"/>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/delete_question_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_button"
+        android:drawablePadding="4dp"
+        />
 
 
 

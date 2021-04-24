@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ public class QuestionFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mTrueCheckBox;
     private CheckBox mFalseCheckBox;
+    private Button mDeleteButton;
 
     public static QuestionFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
@@ -65,28 +67,79 @@ public class QuestionFragment extends Fragment {
             }
         });
 
+        mDeleteButton = (Button) v.findViewById(R.id.delete_question_button);
+        mDeleteButton.setOnClickListener(new View.OnClickListener(){
+            //deletes the selected question unless there is only 1 question left
+            @Override
+            public void onClick(View v){
+                QuestionBank questionBank = QuestionBank.get(getContext());
+                if(questionBank.getLength() > 1) {
+                    questionBank.getQuestionBank().remove(mQuestion);
+                    getActivity().onBackPressed();
+                } else{
+                    Toast.makeText(getContext(), "Don't delete all the questions. Then you'll have no questions and no quiz. And you will be sad.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
 
         //when true check box checked, make false checkbox unchecked and question true
         mTrueCheckBox = (CheckBox) v.findViewById(R.id.question_true_box);
+        /*
         mTrueCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
                 if(mTrueCheckBox.isChecked()){
                     mFalseCheckBox.setChecked(false);
                     mQuestion.setAnswerTrue(true);
+                } else{
+                    mTrueCheckBox.setChecked(true); //doesn't allow both to be unchecked
+                }
+            }
+        });
+        */
+
+
+        mTrueCheckBox.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(mTrueCheckBox.isChecked()){
+                    mFalseCheckBox.setChecked(false);
+                    mQuestion.setAnswerTrue(true);
+                } else{
+                    mTrueCheckBox.setChecked(true); //doesn't allow both to be unchecked
                 }
             }
         });
 
+
+
         //when false check box checked, make true checkbox unchecked and question false
         mFalseCheckBox = (CheckBox) v.findViewById(R.id.question_false_box);
+        /*
         mFalseCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
                 if(mFalseCheckBox.isChecked()){
                     mTrueCheckBox.setChecked(false);
                     mQuestion.setAnswerTrue(false);
+                } else{
+                    mFalseCheckBox.setChecked(true); //doesn't allow both to be unchecked
+                }
+            }
 
+        });
+
+         */
+
+        mFalseCheckBox.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(mFalseCheckBox.isChecked()){
+                    mTrueCheckBox.setChecked(false);
+                    mQuestion.setAnswerTrue(false);
+                } else{
+                    mFalseCheckBox.setChecked(true); //doesn't allow both to be unchecked
                 }
             }
         });

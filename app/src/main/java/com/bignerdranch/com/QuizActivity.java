@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.UUID;
 
 //Todo: can uncheck both boxes for true/false
+//Todo: change all crime names
 
 
 
@@ -56,7 +57,6 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_main);
 
-        //Todo: commented this out
         mQuestionBank = QuestionBank.get(getApplicationContext());
 
         String helloValue= getResources().getString(R.string.app_name);
