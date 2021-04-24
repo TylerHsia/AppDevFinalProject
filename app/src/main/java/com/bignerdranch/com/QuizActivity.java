@@ -18,8 +18,6 @@ import android.widget.Toast;
 
 import java.util.UUID;
 
-//Todo: can uncheck both boxes for true/false
-//Todo: change all crime names
 
 
 
@@ -39,7 +37,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHEAT = 0;
     private boolean mIsCheater;
     private QuestionBank mQuestionBank;
-    private static final String EXTRA_QUESTION_ID = "com.bignerdranch.android.criminalintent.question_id";
+    private static final String EXTRA_QUESTION_ID = "com.bignerdranch.android.geoquiz.question_id";
 
 
 

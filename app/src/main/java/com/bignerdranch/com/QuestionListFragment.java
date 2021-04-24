@@ -21,15 +21,13 @@ public class QuestionListFragment extends Fragment {
 
     private RecyclerView mQuestionRecyclerView;
     private QuestionAdapter mAdapter;
-    //variable to store UUID of the crime clicked
-    private UUID UUIDPositionClicked;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_question_list, container, false);
 
         mQuestionRecyclerView = (RecyclerView) view
-                .findViewById(R.id.crime_recycler_view);
+                .findViewById(R.id.question_recycler_view);
         mQuestionRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
@@ -53,26 +51,24 @@ public class QuestionListFragment extends Fragment {
         }
         else{
             //find the position
-            //int position = mAdapter.getPosition();
             //notify that this position was changed
             //mAdapter.notifyItemChanged(position);
             mAdapter.notifyDataSetChanged();
         }
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class QuestionHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        //Todo: make specific to geoquiz
         private Question mQuestion;
         private TextView mTitleTextView;
         private TextView mDateTextView;
 
-        public CrimeHolder(LayoutInflater inflater, ViewGroup parent){
-            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+        public QuestionHolder(LayoutInflater inflater, ViewGroup parent){
+            super(inflater.inflate(R.layout.list_item_question, parent, false));
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
-            mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
+            mTitleTextView = (TextView) itemView.findViewById(R.id.question_display);
+            mDateTextView = (TextView) itemView.findViewById(R.id.true_false_box);
         }
 
         public void bind(Question question){
@@ -85,30 +81,28 @@ public class QuestionListFragment extends Fragment {
         public void onClick(View v){
 
             Intent intent = QuestionActivity.newIntent(getActivity(), mQuestion.getId());
-            //store the UUID
-            UUIDPositionClicked = mQuestion.getId();
             startActivity(intent);
         }
     }
 
-    private class QuestionAdapter extends RecyclerView.Adapter<CrimeHolder>{
+    private class QuestionAdapter extends RecyclerView.Adapter<QuestionHolder>{
 
         private List<Question> mQuestions;
 
-        public QuestionAdapter(List<Question> crimes){
-            mQuestions = crimes;
+        public QuestionAdapter(List<Question> questions){
+            mQuestions = questions;
         }
 
         @NonNull
         @Override
-        public CrimeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public QuestionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
 
-            return new CrimeHolder(layoutInflater, parent);
+            return new QuestionHolder(layoutInflater, parent);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull CrimeHolder holder, int position) {
+        public void onBindViewHolder(@NonNull QuestionHolder holder, int position) {
             Question question = mQuestions.get(position);
             holder.bind(question);
         }
@@ -119,16 +113,6 @@ public class QuestionListFragment extends Fragment {
         }
 
 
-        //method to find the position of a given question in mQuestionBank
-        public int getPosition(){
-            int position = 0;
-            for (Question question : mQuestions){
-                if(question.getId().equals(UUIDPositionClicked)){
-                    return position;
-                }
-                position++;
-            }
-            return position;
-        }
+
     }
 }

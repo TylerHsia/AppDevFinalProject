@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,7 +19,7 @@ import java.util.UUID;
 
 public class QuestionFragment extends Fragment {
 
-    private static final String ARG_CRIME_ID = "crime_id";
+    private static final String ARG_QUESTION_ID = "question_id";
     private Question mQuestion;
     private EditText mTitleField;
     private Button mDateButton;
@@ -28,9 +27,9 @@ public class QuestionFragment extends Fragment {
     private CheckBox mFalseCheckBox;
     private Button mDeleteButton;
 
-    public static QuestionFragment newInstance(UUID crimeId){
+    public static QuestionFragment newInstance(UUID questionID){
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID, crimeId);
+        args.putSerializable(ARG_QUESTION_ID, questionID);
 
         QuestionFragment fragment = new QuestionFragment();
         fragment.setArguments(args);
@@ -40,7 +39,7 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID questionID = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        UUID questionID = (UUID) getArguments().getSerializable(ARG_QUESTION_ID);
         mQuestion = QuestionBank.get(getActivity()).getQuestion(questionID);
     }
 
@@ -49,7 +48,6 @@ public class QuestionFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_question, container, false);
 
         mTitleField = (EditText) v.findViewById(R.id.question_title);
-        //mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class QuestionActivity extends SingleFragmentActivity {
 
-    private static final String EXTRA_QUESTION_ID = "com.bignerdranch.android.criminalintent.crime_id";
+    private static final String EXTRA_QUESTION_ID = "com.bignerdranch.android.geoquiz.question_id";
 
     public static Intent newIntent(Context packageContext, UUID questionID){
         Intent intent = new Intent(packageContext, QuestionActivity.class);
@@ -18,8 +18,8 @@ public class QuestionActivity extends SingleFragmentActivity {
     }
     @Override
     protected Fragment createFragment(){
-        UUID crimeId = (UUID) getIntent()
+        UUID questionID = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_QUESTION_ID);
-        return QuestionFragment.newInstance(crimeId);
+        return QuestionFragment.newInstance(questionID);
     }
 }
