@@ -23,6 +23,7 @@ import java.util.UUID;
 
 public class QuizActivity extends AppCompatActivity {
 
+    //Todo: make question
     private static final String TAG = "QuizActivity";
     private Button mTrueButton;
     private Button mFalseButton;

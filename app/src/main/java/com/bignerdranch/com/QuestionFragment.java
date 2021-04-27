@@ -48,6 +48,11 @@ public class QuestionFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_question, container, false);
 
         mTitleField = (EditText) v.findViewById(R.id.question_title);
+        //if mQuestion text field != "Blank", set title field to question
+        if(!mQuestion.getText().equals("Blank")) {
+            mTitleField.setText(mQuestion.getText());
+        }
+
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
