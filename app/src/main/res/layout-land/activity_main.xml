@@ -31,11 +31,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/cheat_button"
+        android:id="@+id/previous_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cheat_button"
-        android:layout_gravity="bottom|center_horizontal"/>
+        android:text="@string/previous_button"
+        android:drawableLeft="@drawable/arrow_left"
+        android:layout_gravity="bottom|left"
+        />
 
     <Button
         android:id="@+id/next_button"
@@ -45,6 +47,14 @@
         android:text="@string/next_button"
         android:drawableRight="@drawable/arrow_right"
         android:drawablePadding="4dp"
+        />
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_button"
+        android:layout_gravity="bottom|center_horizontal"
         />
 
 
