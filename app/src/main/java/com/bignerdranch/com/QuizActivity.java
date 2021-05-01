@@ -23,7 +23,7 @@ import java.util.UUID;
 
 public class QuizActivity extends AppCompatActivity {
 
-    //Todo: make question
+    //Todo: keyboard is weird
     private static final String TAG = "QuizActivity";
     private Button mTrueButton;
     private Button mFalseButton;
@@ -48,6 +48,7 @@ public class QuizActivity extends AppCompatActivity {
         Intent intent = new Intent(packageContext, QuizActivity.class);
         intent.putExtra(EXTRA_QUESTION_ID, questionId);
         return intent;
+
     }
 
     @Override
