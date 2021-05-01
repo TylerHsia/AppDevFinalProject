@@ -23,7 +23,7 @@ import java.util.UUID;
 
 public class QuizActivity extends AppCompatActivity {
 
-    //Todo: keyboard is weird, change repo
+    //Todo: change repos
     private static final String TAG = "QuizActivity";
     private Button mTrueButton;
     private Button mFalseButton;
