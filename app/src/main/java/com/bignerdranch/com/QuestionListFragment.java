@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.UUID;
 
 
 public class QuestionListFragment extends Fragment {
@@ -61,20 +61,22 @@ public class QuestionListFragment extends Fragment {
 
         private Question mQuestion;
         private TextView mTitleTextView;
-        private TextView mDateTextView;
+        private TextView mTrueFalseTextView;
 
         public QuestionHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_question, parent, false));
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.question_display);
-            mDateTextView = (TextView) itemView.findViewById(R.id.true_false_box);
+            mTrueFalseTextView = (TextView) itemView.findViewById(R.id.true_false_box);
         }
 
         public void bind(Question question){
             mQuestion = question;
             mTitleTextView.setText(mQuestion.getText());
-            mDateTextView.setText("" + mQuestion.isAnswerTrue());
+            if(mQuestion.isAnswerTrue()){
+                mTrueFalseTextView.setText("True");
+            } else mTrueFalseTextView.setText("False");
         }
 
         @Override
@@ -83,6 +85,10 @@ public class QuestionListFragment extends Fragment {
             Intent intent = QuestionActivity.newIntent(getActivity(), mQuestion.getId());
             startActivity(intent);
         }
+
+
+
+
     }
 
     private class QuestionAdapter extends RecyclerView.Adapter<QuestionHolder>{

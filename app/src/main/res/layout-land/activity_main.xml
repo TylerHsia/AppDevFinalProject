@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:textSize="18sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,13 +22,21 @@
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/true_button" />
+            android:layout_marginHorizontal="4dp"
+            android:text="@string/true_button"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:backgroundTint="#00FFFFFF"/>
 
         <Button
             android:id="@+id/false_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/false_button" />
+            android:layout_marginHorizontal="4dp"
+            android:text="@string/false_button"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:backgroundTint="#00FFFFFF"/>
 
     </LinearLayout>
 
@@ -34,20 +44,20 @@
         android:id="@+id/previous_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/previous_button"
-        android:drawableLeft="@drawable/arrow_left"
         android:layout_gravity="bottom|left"
-        />
+        android:drawableLeft="@drawable/arrow_left"
+        android:text="@string/previous_button"
+        app:backgroundTint="#E91E63" />
 
     <Button
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:text="@string/next_button"
         android:drawableRight="@drawable/arrow_right"
         android:drawablePadding="4dp"
-        />
+        android:text="@string/next_button"
+        app:backgroundTint="#4CAF50" />
 
     <Button
         android:id="@+id/edit_button"
@@ -55,7 +65,7 @@
         android:layout_height="wrap_content"
         android:text="@string/edit_button"
         android:layout_gravity="bottom|center_horizontal"
-        />
+        android:textAllCaps="false"/>
 
 
 

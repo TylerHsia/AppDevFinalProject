@@ -23,7 +23,7 @@ import java.util.UUID;
 
 public class QuizActivity extends AppCompatActivity {
 
-    //Todo: change repos
+
     private static final String TAG = "QuizActivity";
     private Button mTrueButton;
     private Button mFalseButton;
@@ -63,6 +63,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if(savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+
             //retrieve value for ischeater from savedinstancesate
             mIsCheater = savedInstanceState.getBoolean(KEY_CHEATER, false);
         }
@@ -166,11 +167,19 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
+        //if current index is out of bounds due to deleted questions, reset to zero
+        if(mCurrentIndex > mQuestionBank.getLength() - 1){
+            mCurrentIndex = 0;
+        }
         Log.d(TAG, "onStart() called");
     }
     @Override
     public void onResume(){
         super.onResume();
+        //if current index is out of bounds due to deleted questions, reset to zero
+        if(mCurrentIndex > mQuestionBank.getLength() - 1){
+            mCurrentIndex = 0;
+        }
         updateQuestion();
         Log.d(TAG, "onResume() called");
     }
